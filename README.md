@@ -4,6 +4,7 @@ Goto: https://www.katacoda.com/scenario-examples/courses/environment-usages/node
 ```
 curl -LSfs https://raw.githubusercontent.com/github167/demo-truffle/metacoin/init.sh | sh
 
+cd metacoin
 truffle develope
 migrate
 instance = await MetaCoin.deployed()
