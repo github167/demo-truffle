@@ -2,7 +2,6 @@ npm install -g truffle
 mkdir metacoin
 cd metacoin
 truffle unbox metacoin
-truffle compile
 
 cat << EOF > truffle-config.js
 module.exports = {
@@ -22,4 +21,3 @@ module.exports = {
 
 EOF
 
-truffle develope
