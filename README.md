@@ -3,7 +3,8 @@ Goto: https://www.katacoda.com/scenario-examples/courses/environment-usages/node
 1. truffle
 ```
 curl -LSfs https://raw.githubusercontent.com/github167/demo-truffle/metacoin/init.sh | sh
-
+```
+```
 cd metacoin
 truffle develope
 migrate
