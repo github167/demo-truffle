@@ -3,7 +3,7 @@ Goto: https://www.katacoda.com/scenario-examples/courses/environment-usages/node
 1. truffle
 ```
 curl -LSfs https://raw.githubusercontent.com/github167/demo-truffle/web3/init.sh | sh
-cd dbank
+cd web3_token
 truffle develope
 migrate --reset
 
