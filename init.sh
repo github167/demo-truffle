@@ -83,6 +83,3 @@ async function run() {
 run()
 EOF
 
-truffle develop
-migrate --reset
-
