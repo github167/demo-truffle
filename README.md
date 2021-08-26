@@ -10,5 +10,6 @@ migrate --reset
 ```
 copy the contract address, and paste to the line 4 of app.js
 ```
+sed "s/const address = ''/const address= 'contract_address'/" app.js
 node app.js
 ```
