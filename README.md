@@ -2,12 +2,13 @@ Goto: https://www.katacoda.com/scenario-examples/courses/environment-usages/node
 
 1. truffle
 ```
-curl -LSfs https://raw.githubusercontent.com/github167/demo-truffle/dbank/init.sh | sh
+curl -LSfs https://raw.githubusercontent.com/github167/demo-truffle/web3/init.sh | sh
 cd dbank
 truffle develope
+migrate --reset
+
 ```
+copy the contract address, and paste to the line 4 of app.js
 ```
-truffle compile
-truffle migrate --reset
-truffle test
+node app.js
 ```
