@@ -1,85 +1,95 @@
-# https://github.com/dappuniversity/web3_token
-git clone https://github.com/dappuniversity/web3_token
-cd web3_token
-npm install truffle
-mv contracts/DappToken.sol ./DappToken.sol
-rm -rf contracts
-truffle init
-mv ./DappToken.sol contracts/DappToken.sol
+# https://ithelp.ithome.com.tw/articles/10203977
+mkdir work work/src work/static
+cd work
+npm init -y
+npm install web3 nanohtml morphdom csjs-inject budo
 
-cat << EOF > truffle-config.js
-module.exports = {
-  networks: {
-    develop: {
-     host: "127.0.0.1",     // Localhost (default: none)
-     port: 7545,            // Standard Ethereum port (default: none)
-     network_id: "*",       // Any network (default: none)
-    },
-  },
-
-  compilers: {
-    solc: {
-      version: "0.4.24",    // Fetch exact version from solc-bin (default: truffle's version)
-    }
-  }
-};
+cat << EOF > static/01.html
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+  <script src="01.js"></script>
+</body>
+</html>
 EOF
 
-cat << EOF > migrations/2_deploy_contracts.js
-const Token = artifacts.require("DappToken");
+cat << 'EOF' > src/01.js
+// 匯入模組
+const Web3 = require('web3');
+const html = require('nanohtml');
+const csjs = require('csjs-inject');
+const morphdom = require('morphdom');
 
-module.exports = async function(deployer) {
-  // Deploy Token
-  await deployer.deploy(Token);
-  const token = await Token.deployed()
-};
-EOF
-
-cat << 'EOF' > app.js
-const Web3 = require('web3')
-const rpcURL = 'http://localhost:7545'
-const web3 = new Web3(rpcURL)
-const address = '' // Paste the smart contract address here after you have deployed it
-
-const abi = [{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_subtractedValue","type":"uint256"}],"name":"decreaseApproval","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"finishMinting","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_addedValue","type":"uint256"}],"name":"increaseApproval","outputs":[{"name":"success","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_amount","type":"uint256"}],"name":"mint","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"pause","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"unpause","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[],"name":"Pause","type":"event"},{"anonymous":false,"inputs":[],"name":"Unpause","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"amount","type":"uint256"}],"name":"Mint","type":"event"},{"anonymous":false,"inputs":[],"name":"MintFinished","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"}],"name":"OwnershipRenounced","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"mintingFinished","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"paused","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}]
-
-const contract = new web3.eth.Contract(abi, address)
-
-async function run() {
-  let result, amount
-  accounts = await web3.eth.getAccounts();
-  owner = accounts[0];
-  account1 = accounts[1];
-  account2 = accounts[2];
-  
-  result = await contract.methods.name().call()
-  console.log(`Token name: ${result}`)
-
-  result = await contract.methods.totalSupply().call()
-  console.log(`Total Supply: ${web3.utils.fromWei(result, 'ether')} tokens`)
-
-  amount = web3.utils.toWei('100')
-  await contract.methods.mint(account1, amount).send({ from: owner })
-  console.log(`Minted ${web3.utils.fromWei(amount, 'ether')} tokens for account #1`)
-
-  result = await contract.methods.balanceOf(account1).call()
-  console.log(`Balance of account #1: ${web3.utils.fromWei(result, 'ether')}`)
-
-  amount = web3.utils.toWei('50')
-  result = await contract.methods.transfer(account2, amount).send({ from: account1 })
-  console.log(`Transferred ${web3.utils.fromWei(amount, 'ether')} tokens from account #1 to account #2`)
-
-  result = await contract.methods.balanceOf(account1).call()
-  console.log(`Balance of account #1: ${web3.utils.fromWei(result, 'ether')}`)
-
-  result = await contract.methods.balanceOf(account2).call()
-  console.log(`Balance of account #2: ${web3.utils.fromWei(result, 'ether')}`)
-
-  result = await contract.methods.totalSupply().call()
-  console.log(`Total Supply: ${web3.utils.fromWei(result, 'ether')} tokens`)
-
+// 初始化 web3.js
+const INFURA_API_KEY = 'bfa0ceaaf2024fbba3222253de7795a4';
+if (typeof web3 !== 'undefined') {
+  //web3 = new Web3(web3.currentProvider);
+  web3 =:q new Web3(`https://mainnet.infura.io/v3/${INFURA_API_KEY}`);
+} else {
+  web3 = new Web3(`https://mainnet.infura.io/v3/${INFURA_API_KEY}`);
 }
 
-run()
+
+// 設定 css inject
+const css = csjs `
+  .box {
+  }
+  .input {
+    margin: 10px;
+    width: 500px;
+    font-size: 20px;
+  }
+  .button {
+    margin-top: 10px;
+    font-size: 20px;
+    width: 180px;
+    background-color: #4CAF50;
+    color: white;
+  }
+  .result {
+    margin: 10px;
+  }
+  img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+  }
+`
+
+const address = '0x06012c8cf97BEaD5deAe237070F9587f8E7A266d';
+
+// ==== DOM element ===
+
+const inputAccount = html `<input class=${css.input} type="text" value=${address} placeholder="輸入你要查詢的帳戶"/>`;
+const resultElement = html `<div></div>`
+
+// ===== Event =====
+
+function queryBalance(event) {
+  web3.eth.getBalance(inputAccount.value, (err, balance) => {
+    let number = Math.round(web3.utils.fromWei(balance, 'ether') * 100) / 100;
+    const newElement = html `<div class="${css.result}">結果：${number} Ether</div>`
+    morphdom(resultElement, newElement);
+  });
+}
+
+// ===== render ===== 
+
+function render() {
+  document.body.appendChild(html `
+  <div class=${css.box} id="app">
+    ${inputAccount}
+    <button class=${css.button} onclick=${queryBalance}>查詢 Ether 金額</button>
+    ${resultElement}
+  </div>
+ `)
+}
+
+render();
 EOF
 
+budo src/01.js:bundle.js --live --open --dir ./static
