@@ -27,7 +27,7 @@ const morphdom = require('morphdom');
 const INFURA_API_KEY = 'bfa0ceaaf2024fbba3222253de7795a4';
 if (typeof web3 !== 'undefined') {
   //web3 = new Web3(web3.currentProvider);
-  web3 =:q new Web3(`https://mainnet.infura.io/v3/${INFURA_API_KEY}`);
+  web3 = new Web3(`https://mainnet.infura.io/v3/${INFURA_API_KEY}`);
 } else {
   web3 = new Web3(`https://mainnet.infura.io/v3/${INFURA_API_KEY}`);
 }
