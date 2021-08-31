@@ -127,7 +127,7 @@ if (typeof web3 !== 'undefined') {
 }
 
 const ABI = require('./abi.json');
-const DEFAULT_ADDRESS = '0x2D30342261CC08b1E968B13479cEf64877aA7b91';
+const DEFAULT_ADDRESS = '';
 const contractAddress = DEFAULT_ADDRESS;
 const myContract = new web3.eth.Contract(ABI, contractAddress);
 
