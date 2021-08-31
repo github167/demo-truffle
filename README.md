@@ -2,14 +2,14 @@ Goto: https://www.katacoda.com/scenario-examples/courses/environment-usages/node
 
 1. truffle
 ```
-curl -LSfs https://raw.githubusercontent.com/github167/demo-truffle/web3/init.sh | sh
-cd web3_token
+curl -LSfs https://raw.githubusercontent.com/github167/demo-truffle/kingofether/init.sh | sh
+cd king-sandbox
 truffle develope
 migrate --reset
 
 ```
-copy the contract address, and paste to the line 4 of app.js
+copy the contract address, and paste to the line 11 of abc.js
 ```
-sed -i "s/const address = ''/const address= 'contract_address'/" app.js
-node app.js
+sed -i "s/const DEFAULT_ADDRESS = ''/const DEFAULT_ADDRESS = 'contract_address'/" src/abc.js
+node abc.js
 ```
