@@ -191,7 +191,4 @@ greetingApp();
 
 EOF
 
-cd ..
-truffle develop
-migrate
 
