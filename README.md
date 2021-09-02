@@ -2,7 +2,7 @@ Goto: https://www.katacoda.com/scenario-examples/courses/environment-usages/node
 
 1. truffle
 ```
-curl -LSfs https://raw.githubusercontent.com/github167/demo-truffle/kingofether/init.sh | sh
+curl -LSfs https://raw.githubusercontent.com/github167/demo-truffle/greeting/init.sh | sh
 cd king-sandbox
 truffle develope
 migrate --reset
