@@ -1,19 +1,19 @@
 Goto: https://www.katacoda.com/scenario-examples/courses/environment-usages/nodejs
 
-1. truffle
+1. hardhat
 ```
-curl -LSfs https://raw.githubusercontent.com/github167/demo-truffle/greeting/init.sh | sh
-cd DappTuto
-truffle develope
-migrate --reset
+# orignate from https://github.com/kybernetwork
+git clone https://github.com/nomiclabs/hardhat-hackathon-boilerplate.git
+cd hardhat-hackathon-boilerplate
+npm install
 
+npx hardhat node
 ```
-copy the contract address, and paste to the line 19 of abc.js
+Another terminal
 ```
-node abc.js
+npx hardhat run scripts/deploy.js --network localhost
+cd frontend
+npm install
+npm start
 ```
-For web (not test yet)
-copy the contract address, and past to the line 16 of client/src/utils.js
-```
-./node_modules/.bin/lite-server
-```
+Goto http://localhost:3000
