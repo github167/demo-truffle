@@ -3,10 +3,17 @@ Goto: https://www.katacoda.com/scenario-examples/courses/environment-usages/node
 1. truffle
 ```
 curl -LSfs https://raw.githubusercontent.com/github167/demo-truffle/SimplePonzi/init.sh | sh
-cd web3_token
+cd ethereum-games
 truffle develope
-migrate --reset
+migrate -f 6 --to 6
 
+//instance = await SimplePonzi.deployed()
+accounts = await web3.eth.getAccounts()
+web3.eth.sendTransaction({ from: accounts[0], to: SimplePonzi.address, value: 1e18 })
+web3.eth.getBalance(accounts[0]) // first check
+web3.eth.sendTransaction({ from: accounts[1], to: SimplePonzi.address, value: 1e17 }) // error
+web3.eth.sendTransaction({ from: accounts[1], to: SimplePonzi.address, value: 2e18 })
+web3.eth.getBalance(accounts[0]) // second check
 ```
 copy the contract address, and paste to the line 4 of app.js
 ```
