@@ -5,6 +5,9 @@ Goto: https://www.katacoda.com/scenario-examples/courses/environment-usages/node
 curl -LSfs https://raw.githubusercontent.com/github167/demo-truffle/SimplePonzi/init.sh | sh
 cd ethereum-games
 truffle develope
+```
+2. SimplePonzi
+```
 migrate -f 6 --to 6
 
 //instance = await SimplePonzi.deployed()
