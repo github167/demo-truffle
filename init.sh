@@ -1,4 +1,5 @@
 npm install -g truffle
+npm install -g web3
 git clone https://github.com/k26dr/ethereum-games
 cd ethereum-games
 
