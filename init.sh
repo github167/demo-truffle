@@ -88,16 +88,3 @@ async function run() {
 }
 run()
 EOF
-
-
-truffle develop
-migrate -f 6 --to 6
-
-
-//instance = await SimplePonzi.deployed()
-accounts = await web3.eth.getAccounts()
-web3.eth.sendTransaction({ from: accounts[0], to: SimplePonzi.address, value: 1e18 })
-web3.eth.getBalance(accounts[0]) // first check
-web3.eth.sendTransaction({ from: accounts[1], to: SimplePonzi.address, value: 1e17 }) // error
-web3.eth.sendTransaction({ from: accounts[1], to: SimplePonzi.address, value: 2e18 })
-web3.eth.getBalance(accounts[0]) // second check
