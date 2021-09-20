@@ -1,90 +1,22 @@
-npm install -g truffle
-npm install -g web3
-git clone https://github.com/k26dr/ethereum-games
-cd ethereum-games
+npm install -g circom
+npm install -g snarkjs
+npm install -g yarn
+git clone https://github.com/chnejohnson/simple-tornado
+cd simple-tornado
+yarn
 
-cat << EOF > truffle.js
-module.exports = {
-    compilers: {
-        solc: {
-          version: "^0.4.13"
-        }
-    },
-    networks: {
-        develop: {
-            host: "localhost",
-            port: 7545,
-            network_id: "*" // Match any network id
-        },
-    }
-}
-EOF
+mkdir -p ./build/circuits
+mkdir -p ./build/contracts
 
-cat << 'EOF' > app.js
-const Web3 = require('web3')
-const rpcURL = 'http://localhost:7545'
-const web3 = new Web3(rpcURL)
-const address = '' // Paste the smart contract address here after you have deployed it
-const abi = [
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "currentInvestor",
-    "outputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "currentInvestment",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "payable": true,
-    "stateMutability": "payable",
-    "type": "fallback"
-  }
-]
-const contract = new web3.eth.Contract(abi, address)
+# build hasher
+yarn build:hasher
 
-async function run() {
-  let result, amount
-  accounts = await web3.eth.getAccounts();
-  owner = accounts[0];
-  account1 = accounts[1];
-  account2 = accounts[2];
-  
-  result = await web3.eth.getBalance(accounts[0]) // first check
-  console.log("owner: "+result)  
-  result = await web3.eth.getBalance(accounts[1]) // first check
-  console.log("[1]: "+result)  
-    
-  result =  await web3.eth.sendTransaction({ from: accounts[0], to:address, value: 1e18 })
-  console.log(result)
-  
-  result = await web3.eth.getBalance(accounts[0]) // first check
-  console.log("owner after sending "+result);
-    
-  result = await web3.eth.sendTransaction({ from: accounts[1], to: address, value: 2e18 })
-  console.log(result);
-  
-  result = await web3.eth.getBalance(accounts[0]) // first check
-  console.log("owner final amount "+result);
-}
-run()
-EOF
+# build circuits
+cd ./build/circuits
+circom ../../circuits/withdraw.circom --r1cs circuit.r1cs --wasm circuit.wasm --sym circuit.sym
+wget https://hermez.s3-eu-west-1.amazonaws.com/powersOfTau28_hez_final_15.ptau
+snarkjs zkey new circuit.r1cs powersOfTau28_hez_final_15.ptau circuit_0000.zkey
+echo mnbvc | snarkjs zkey contribute circuit_0000.zkey circuit_final.zkey
+
+#build verification key
+snarkjs zkey export verificationkey circuit_final.zkey verification_key.json
