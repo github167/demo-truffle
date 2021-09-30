@@ -19,5 +19,5 @@ npm run build:contract
 npm run migrate:dev
 
 
-node cli.js test
+node abc.js test
 ```
