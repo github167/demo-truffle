@@ -1,13 +1,23 @@
 Goto: https://www.katacoda.com/scenario-examples/courses/environment-usages/nodejs
 
-1. install
+1. launch granche-cli
 ```
-curl -LSfs https://raw.githubusercontent.com/github167/demo-truffle/tornado-cli/init.sh | sh
-cd tornado-cli
+npx ganache-cli -a 2 -i 1337
 ```
-Contract address (in config.js): https://etherscan.io/address/0x47CE0C6eD5B0Ce3d3A51fdb1C52DC66a7c3c2936#events
-```
-node abc.js --rpc https://mainnet.infura.io/v3/bfa0ceaaf2024fbba3222253de7795a4 run 13306000
 
-node abc.js --rpc https://mainnet.infura.io/v3/bfa0ceaaf2024fbba3222253de7795a4 balance  0x47CE0C6eD5B0Ce3d3A51fdb1C52DC66a7c3c2936
+2. install (open a new terminal)
+```
+curl -LSfs https://raw.githubusercontent.com/github167/demo-truffle/tornado-core/init.sh | sh
+cd tornado-core
+```
+
+3. run test
+```
+cp .env.example .env
+npm run download
+npm run build:contract
+npm run migrate:dev
+
+
+node cli.js test
 ```
