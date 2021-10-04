@@ -32,7 +32,7 @@ curl -LSfs https://raw.githubusercontent.com/github167/demo-truffle/tornado-core
 curl -LSfs https://raw.githubusercontent.com/github167/demo-truffle/tornado-core/Verifier.sol > build/circuits/Verifier.sol
 ```
 
-3. run test
+4. run test
 ```
 npm run build:contract
 npm run migrate:dev
