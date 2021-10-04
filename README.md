@@ -1,5 +1,6 @@
 Goto: https://www.katacoda.com/scenario-examples/courses/environment-usages/nodejs
 
+
 1. launch granche-cli
 ```
 npx ganache-cli -a 2 -i 1337
